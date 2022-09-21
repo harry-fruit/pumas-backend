@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+
+  supermarket:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: rootroot
+      MARIADB_ROOT_HOST: '%'
+      MARIADB_DATABASE: 'puma'
+    ports:
+      - "3306:3306"

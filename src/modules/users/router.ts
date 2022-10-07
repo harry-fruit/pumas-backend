@@ -1,15 +1,8 @@
 import { Request, Response, Router } from "express";
 import { createUser } from "./handlers/createUser";
-// import { Model } from "sequelize";
-// import { DeleteHandlerResponseType } from "../../utils/DeleteHandlerResponse";
-// import { HttpResponse, HttpResponseType } from "../../utils/HttpResponse";
-// import { UpdateUserDto } from "./dto/updateUser.dto";
-// import { createUser } from "./handlers/createUser";
-// import { deleteUser } from "./handlers/deleteUser";
-// import { updateUser } from "./handlers/updateUser";
-// import { UserInterface } from "./interfaces/User.interface";
-// import { StatusCodes as HttpStatusCode , ReasonPhrases as HttpStatus } from 'http-status-codes';
-// import { getAllUsers, getUser } from "./handlers/getUser";
+import { config as LoadEnvironmentVariables } from 'dotenv';
+
+LoadEnvironmentVariables();
 
 export const userRouter: Router = Router();
 
@@ -17,11 +10,9 @@ userRouter.post("/create-user", async (request: Request, response: Response): Pr
     try {
 
       const user = await createUser(request.body);
-    // const handledResponse: HttpResponseType = HttpResponse(HttpStatus.CREATED, HttpStatusCode.CREATED, user);
-
-      response
-        .status(201)
-        .send(user);
+      if (user) {
+        response.redirect(`${process.env.URL_BASE}/auth/Login`)
+      }
     
       } catch (error: any) {
         console.log(error);

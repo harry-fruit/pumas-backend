@@ -6,21 +6,33 @@ export type CreateUser = {
       Login: string,
       Email: string
       Password: string,
-      Birthdate: string,
+      ConfirmPassword: string,
+    //   Birthdate?: string,
       Gender?: string,
       Phone: string,
-      Cpf: string,
-      Cep: string,
-      Address: string
-      Number: number,
-      Complement?: string,
-      CountryName: string,
-      StateName: string,
+    //   Cpf: string,
+    //   Cep: string,
+    //   Address: string
+    //   Number: number,
+    //   Complement?: string,
+    //   CountryName: string,
+    //   StateName: string,
 }
 
 export const createUser = async (userPayload:CreateUser) => {
     try {
-        const user = UserEntity.create({...userPayload, CreatedAt:Date.now()})
+        const add = {
+            Birthdate: Date.now(),
+            Cpf: '00000000012',
+            Cep: '00000-000',
+            Address: 'Teste',
+            Number: 123,
+            CountryName: 'teste',
+            StateName: 'teste'
+        }
+        const payload = { ...userPayload, ...add};
+        
+        const user = UserEntity.create({...payload, CreatedAt:Date.now()})
 
         return user;
     } catch (e) {

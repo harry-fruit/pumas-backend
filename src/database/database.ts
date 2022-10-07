@@ -15,9 +15,11 @@ export const DbInstance = new Sequelize(
 export const DatabaseConnection = async (): Promise<void> => {
     try {
         await DbInstance.authenticate()
-            .then( () => console.log('Database authenticate sucessful') );
-        await DbInstance.sync()
-            .then( () => console.log('Database sync sucessful') );
+            .then( () => console.log('Database authenticate sucessful') )
+        // await DbInstance.sync({ alter:true })
+        //     .then( ()=>{
+        //         console.log('Database sync sucessful')
+        //     });
     } catch(error: any) {
         throw new Error(error);
     }

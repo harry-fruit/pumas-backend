@@ -6,13 +6,6 @@ export type CreateUser = {
     Birthdate?: Date
     Gender: string
     Phone: string
-    // Cpf?: string
-    // Cep?: string
-    // Address?: string
-    // Number?: number
-    // Complement?: string,
-    // IdCountry?: number,
-    // IdState?: number,
     CreatedAt?: Date,
     UpdatedAt?: Date
 }

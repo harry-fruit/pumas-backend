@@ -1,5 +1,6 @@
-import { DataType } from "sequelize-typescript";
-import { DbInstance } from "../database";
+import { DataType, ModelCtor } from "sequelize-typescript";
+import { DbInstance } from "../Database";
+import { CountryEntity } from "./Country.entity";
 
 export const StateEntity = DbInstance.define(
   "State",
@@ -13,6 +14,11 @@ export const StateEntity = DbInstance.define(
     },
     Name: {
       type: DataType.STRING(50),
+      allowNull: false,
+      unique: true
+    },
+    IdCountry: {
+      type: DataType.INTEGER,
       allowNull: false,
     },
     CreatedAt: {
@@ -30,3 +36,5 @@ export const StateEntity = DbInstance.define(
     freezeTableName: true
   }
 );
+
+StateEntity.belongsTo(CountryEntity, { foreignKey: 'IdCountry' })

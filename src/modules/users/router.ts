@@ -6,20 +6,32 @@ LoadEnvironmentVariables();
 
 export const userRouter: Router = Router();
 
+type CreateUserPayload = {
+  FirstName: string,
+  LastName: string,
+  Email: string,
+  Gender: string,
+  Cpf: string,
+  Phone: string,
+  Password: string,
+}
+
 userRouter.post("/create-user", async (request: Request, response: Response): Promise<void> => {
     try {
-
-      const user = await createUser(request.body);
+      const payload: CreateUserPayload = request.body;
+      console.log(payload)
+      const user = await createUser(payload);
       if (user) {
-        response.redirect(`${process.env.URL_BASE}/auth/Login`)
+        response.send('ok')
+      } else {
+        response.send(user)
       }
     
       } catch (error: any) {
         console.log(error);
       // throw HttpResponse(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatusCode.INTERNAL_SERVER_ERROR, error);
     };
-  }
-);
+});
 
 // userRouter.get("/", async (request: Request, response: Response, next): Promise<void> => {
 //     try {

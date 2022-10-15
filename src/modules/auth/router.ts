@@ -8,9 +8,7 @@ export const authRouter: Router = Router();
 
 authRouter.post("/login", async (request: Request, response: Response): Promise<any> => {
     try {
-        console.log(request.body)
         const auth = await getAuth(request.body);
-        console.log(auth)
 
         if (auth) {
             response.redirect(`${process.env.URL_BASE}/Catalog`);

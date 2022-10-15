@@ -1,5 +1,6 @@
-import { DataType } from "sequelize-typescript";
-import { DbInstance } from "../database";
+import { Model } from "sequelize";
+import { DataType, ModelCtor } from "sequelize-typescript";
+import { DbInstance } from "../Database";
 
 export const CountryEntity = DbInstance.define(
   "Country",
@@ -14,6 +15,7 @@ export const CountryEntity = DbInstance.define(
     Name: {
       type: DataType.STRING(50),
       allowNull: false,
+      unique: true
     },
     CreatedAt: {
       type: DataType.DATE,

@@ -1,5 +1,7 @@
 import { DataType } from "sequelize-typescript";
-import { DbInstance } from "../database";
+import { DbInstance } from "../Database";
+import { CountryEntity } from "./Country.entity";
+import { StateEntity } from "./State.entity";
 
 export const UserEntity = DbInstance.define(
   "User",
@@ -19,13 +21,10 @@ export const UserEntity = DbInstance.define(
       type: DataType.STRING(50),
       allowNull: false,
     },
-    Login: {
-      type: DataType.STRING(150),
-      allowNull: false,
-    },
     Email: {
       type: DataType.STRING(150),
       allowNull: false,
+      unique: false
     },
     Password: {
       type: DataType.STRING(255),
@@ -33,7 +32,7 @@ export const UserEntity = DbInstance.define(
     },
     Birthdate: {
       type: DataType.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     Gender: {
       type: DataType.STRING(10),
@@ -41,43 +40,37 @@ export const UserEntity = DbInstance.define(
     },
     Phone: {
       type: DataType.STRING(15),
-      allowNull: false,
+      allowNull: true,
+      unique: true
     },
     Cpf: {
       type: DataType.STRING(14),
       allowNull: false,
+      unique: true
     },
     Cep: {
       type: DataType.STRING(9),
-      allowNull: false,
+      allowNull: true,
     },
     Address: {
       type: DataType.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     Number: {
       type: DataType.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     Complement: {
       type: DataType.STRING(75),
       allowNull: true,
     },
-    // IdCountry: {
-    //   type: DataType.INTEGER,
-    //   allowNull: false,
-    // },
-    // IdState: {
-    //   type: DataType.INTEGER,
-    //   allowNull: false,
-    // },
-    CountryName: {
-      type: DataType.STRING(100),
-      allowNull: false,
+    IdCountry: {
+      type: DataType.INTEGER,
+      allowNull: true,
     },
-    StateName: {
-      type: DataType.STRING(100),
-      allowNull: false,
+    IdState: {
+      type: DataType.INTEGER,
+      allowNull: true,
     },
     CreatedAt: {
       type: DataType.DATE,
@@ -94,3 +87,6 @@ export const UserEntity = DbInstance.define(
     freezeTableName: true
   }
 );
+
+UserEntity.belongsTo(CountryEntity, { foreignKey: 'IdCountry' })
+UserEntity.belongsTo(StateEntity, { foreignKey: 'IdState' })

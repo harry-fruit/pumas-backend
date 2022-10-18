@@ -16,8 +16,8 @@ export const DatabaseConnection = async (): Promise<void> => {
     try {
         await DbInstance.authenticate()
             .then( () => console.log('Database authenticate sucessful') )
-        // await DbInstance.sync({ force:true })
-        await DbInstance.sync()
+        await DbInstance.sync({ force:true })
+        // await DbInstance.sync()
             .then( ()=>{
                 console.log('Database sync sucessful')
             });

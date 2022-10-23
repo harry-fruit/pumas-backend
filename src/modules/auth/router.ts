@@ -10,13 +10,14 @@ authRouter.post("/login", async (request: Request, response: Response): Promise<
     try {
         const auth = await getAuth(request.body);
 
-        if (auth) {
-            response.redirect(`${process.env.URL_BASE}/Catalog`);
-        } else {
-            response
-                .status(404)
-                .send('Not Found');
-        }
+        response.send(auth);
+        // if (auth) {
+        //     response.redirect(`${process.env.URL_BASE}/Catalog`);
+        // } else {
+        //     response
+        //         .status(404)
+        //         .send('Not Found');
+        // }
         
     
       } catch (error: any) {

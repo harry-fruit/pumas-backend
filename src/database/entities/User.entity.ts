@@ -2,6 +2,7 @@ import { DataType } from "sequelize-typescript";
 import { DbInstance } from "../Database";
 import { CountryEntity } from "./Country.entity";
 import { StateEntity } from "./State.entity";
+import { SysTypeEntity } from "./SysType";
 
 export const UserEntity = DbInstance.define(
   "User",
@@ -12,6 +13,10 @@ export const UserEntity = DbInstance.define(
       unique: true,
       primaryKey: true,
       autoIncrement: true,
+    },
+    IdSysType: {
+      type: DataType.INTEGER,
+      allowNull: false,
     },
     FirstName: {
       type: DataType.STRING(50),
@@ -90,3 +95,4 @@ export const UserEntity = DbInstance.define(
 
 UserEntity.belongsTo(CountryEntity, { foreignKey: 'IdCountry' })
 UserEntity.belongsTo(StateEntity, { foreignKey: 'IdState' })
+UserEntity.belongsTo(SysTypeEntity, { foreignKey: 'IdSysType' })

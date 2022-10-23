@@ -1,4 +1,3 @@
-import { Model } from "sequelize";
 import { DataType, ModelCtor } from "sequelize-typescript";
 import { DbInstance } from "../Database";
 

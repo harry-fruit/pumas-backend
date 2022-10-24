@@ -1,12 +1,23 @@
-import { Sequelize } from "sequelize";
+import moment from "moment";
+import { CountryEntity } from "../entities/Country.entity";
+import { StateEntity } from "../entities/State.entity";
+import { SysTypeEntity } from "../entities/SysType";
+import { SysTypeMDEntity } from "../entities/SysTypesMDs";
 
-export const mainSeed = async (databaseInstance: Sequelize) => {
-    await runCountrySeed(databaseInstance);
-    await runStateSeed(databaseInstance);
+export const mainSeed = async () => {
+  try {
+    await runCountrySeed();
+    await runStateSeed();
+    await runSysType();
+    await runSysTypesMetaDatas();
+
+  } catch (error){
+    console.log(error)
+  }
 };
 
-const runCountrySeed = async (databaseInstance: Sequelize): Promise<void> => {
-    await databaseInstance.models.Country.bulkCreate([
+const runCountrySeed = async (): Promise<void> => {
+    await CountryEntity.bulkCreate([
         {
           Name: "Brazil",
           CreatedAt: Date.now(),
@@ -26,27 +37,74 @@ const runCountrySeed = async (databaseInstance: Sequelize): Promise<void> => {
       ]);
 };
 
-const runStateSeed = async (databaseInstance: Sequelize): Promise<void> => {
-    await databaseInstance.models.State.bulkCreate([
+const runStateSeed = async (): Promise<void> => {
+    await StateEntity.bulkCreate([
         {
           Name: "São Paulo",
           IdCountry: 1,
-          CreatedAt: Date.now(),
+          CreatedAt: moment(),
         },
         {
           Name: "New York",
           IdCountry: 2,
-          CreatedAt: Date.now(),
+          CreatedAt: moment(),
         },
         {
           Name: "Buenos Aires",
           IdCountry: 3,
-          CreatedAt: Date.now(),
+          CreatedAt: moment(),
         },
         {
           Name: "Toronto",
-          IdCountry: "4",
-          CreatedAt: Date.now(),
+          IdCountry: 4,
+          CreatedAt: moment(),
         },
       ]);
 };
+
+const runSysType = async (): Promise<void> => {
+  await SysTypeEntity.bulkCreate([
+    {
+      UniqueCode: 'PARTNER_STORE',
+      Description: 'Store',
+      CreatedAt: moment()
+    },
+    {
+      UniqueCode: 'PARTNER_MOTOBOY',
+      Description: 'Motoboy',
+      CreatedAt: moment()
+    },
+    {
+      UniqueCode: 'CLIENT',
+      Description: 'Cliente',
+      CreatedAt: moment()
+    },
+    
+  ])
+};
+
+const runSysTypesMetaDatas = async (): Promise<void> => {
+  await SysTypeMDEntity.bulkCreate([
+    {
+      IdSysType: 2,
+      UniqueCode: 'CNH',
+      CreatedAt: moment()
+    },
+    {
+      IdSysType: 2,
+      UniqueCode: 'PLACA_MOTO',
+      CreatedAt: moment()
+    },
+    {
+      IdSysType: 1,
+      UniqueCode: 'SOCIAL_REASON',
+      CreatedAt: moment()
+    },
+    {
+      IdSysType: 1,
+      UniqueCode: 'COMERCIAL_NAME',
+      CreatedAt: moment()
+    },
+  ])
+};
+

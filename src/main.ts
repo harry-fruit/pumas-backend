@@ -8,6 +8,8 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import { logApp } from './utils/Logs';
 import { getEnvironment } from './config/config';
+import { mainSeed } from './database/seeds/mainSeed';
+const environment = getEnvironment();
 
 
 const app: Express = express();
@@ -32,5 +34,9 @@ DatabaseConnection();
 
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
+
+setTimeout(()=> {
+  mainSeed()
+}, 5 * 1000)
 
 app.listen(port, () => logApp(getEnvironment(), port));

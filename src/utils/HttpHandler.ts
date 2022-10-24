@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Response, Router } from "express";
 
 export type SendResponseParams = {
   response: Response
@@ -7,7 +7,6 @@ export type SendResponseParams = {
   message?: string;
   data?: any;
 };
-
 export const sendResponse = ({
     response,
     statusCode,
@@ -19,4 +18,3 @@ export const sendResponse = ({
         .status(statusCode)
         .send({ error, data, message })
 };
-

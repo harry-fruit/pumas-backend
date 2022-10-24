@@ -3,6 +3,7 @@ import { config as LoadEnvironmentVariables } from "dotenv";
 import { mainSeed } from "./seeds/mainSeed";
 import { AppEnvironment } from "../utils/Defines";
 import { getEnvironment } from "../config/config";
+import { SysTypeMDEntity } from "./entities/SysTypesMDs";
 
 LoadEnvironmentVariables();
 
@@ -17,20 +18,21 @@ export const DbInstance: Sequelize = new Sequelize(
 
 export const DatabaseConnection = async (): Promise<void> => {
   try {
-    await DbInstance.authenticate().then(async () => {
+    await DbInstance
+      .authenticate()
+      .then(async () => {
       const environment = getEnvironment();
 
       if (environment === AppEnvironment.DEV) {
-        await DbInstance.sync({ force: true }).then(
-          async (database: Sequelize) => {
-            await mainSeed(database);
-          }
-        );
+        await DbInstance.sync({ force: true, logging: true })
+
       } else {
         console.log("Database sync sucessful - PROD ENV");
       }
     });
+
   } catch (error: any) {
+    console.log(error)
     throw new Error(error);
   }
 };

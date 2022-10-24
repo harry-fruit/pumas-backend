@@ -1,8 +1,11 @@
+import { Sequelize } from "sequelize";
 import { DataType } from "sequelize-typescript";
 import { DbInstance } from "../Database";
+import { SysTypeEntity } from "./SysType";
+import { UserEntity } from "./User.entity";
 
-export const SysTypeEntity = DbInstance.define(
-  "SysType",
+export const XDUserEntity = DbInstance.define(
+  "XDUser",
   {
     Id: {
       type: DataType.INTEGER,
@@ -11,12 +14,15 @@ export const SysTypeEntity = DbInstance.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    UniqueCode: {
-        type: DataType.STRING(255),
-        unique: true,
-        allowNull: false
+    IdSysType: {
+      type: DataType.INTEGER,
+      allowNull: false
     },
-    Description: {
+    IdUser: {
+      type: DataType.INTEGER,
+      allowNull: false
+    },
+    UniqueCode: {
         type: DataType.STRING(255),
         unique: true,
         allowNull: false
@@ -32,7 +38,11 @@ export const SysTypeEntity = DbInstance.define(
   },
   {
     timestamps: false,
-    modelName: 'SysType',
+    modelName: 'XDUser',
     freezeTableName: true
   }
 );
+
+
+XDUserEntity.belongsTo(SysTypeEntity, { foreignKey: 'IdSysType' })
+XDUserEntity.belongsTo(UserEntity, { foreignKey: 'IdUser' })

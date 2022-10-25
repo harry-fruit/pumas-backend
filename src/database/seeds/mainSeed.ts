@@ -3,6 +3,8 @@ import { CountryEntity } from "../entities/Country.entity";
 import { StateEntity } from "../entities/State.entity";
 import { SysTypeEntity } from "../entities/SysType";
 import { SysTypeMDEntity } from "../entities/SysTypesMDs";
+import { UserEntity } from "../entities/User.entity";
+import { XDUserEntity } from "../entities/XDUsers";
 
 export const mainSeed = async () => {
   try {
@@ -10,6 +12,8 @@ export const mainSeed = async () => {
     await runStateSeed();
     await runSysType();
     await runSysTypesMetaDatas();
+    await runUsers();
+    await runUserExtraData();
 
   } catch (error){
     console.log(error)
@@ -75,8 +79,8 @@ const runSysType = async (): Promise<void> => {
       CreatedAt: moment()
     },
     {
-      UniqueCode: 'CLIENT',
-      Description: 'Cliente',
+      UniqueCode: 'CONSUMER',
+      Description: 'Consumidor',
       CreatedAt: moment()
     },
     
@@ -107,4 +111,31 @@ const runSysTypesMetaDatas = async (): Promise<void> => {
     },
   ])
 };
+
+const runUsers = async (): Promise<void> => {
+  await UserEntity.bulkCreate([
+    {
+      IdSysType: 1, //Loja
+      Email: 'salgados.mari@example.com',
+      Password: '123',
+      Phone: '7481516',
+      Cnpj: '123456789',
+      CreatedAt: moment()
+    }
+  ])
+}
+
+const runUserExtraData = async(): Promise<void> => {
+  await XDUserEntity.bulkCreate([{
+    IdUser: 1,
+    IdSysTypeMD: 3,
+    Value: 'Comercio de Salgados LTD',
+    CreatedAt: moment()
+  }, {
+    IdUser: 1,
+    IdSysTypeMD: 4,
+    Value: 'Salgados da Mari',
+    CreatedAt: moment()
+  }])
+}
 

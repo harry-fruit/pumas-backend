@@ -20,11 +20,11 @@ export const UserEntity = DbInstance.define(
     },
     FirstName: {
       type: DataType.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     LastName: {
       type: DataType.STRING(50),
-      allowNull: false,
+      allowNull: true,
     },
     Email: {
       type: DataType.STRING(150),
@@ -50,7 +50,12 @@ export const UserEntity = DbInstance.define(
     },
     Cpf: {
       type: DataType.STRING(14),
-      allowNull: false,
+      allowNull: true,
+      unique: true
+    },
+    Cnpj: {
+      type: DataType.STRING(14),
+      allowNull: true,
       unique: true
     },
     Cep: {

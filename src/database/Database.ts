@@ -1,9 +1,7 @@
 import { Sequelize } from "sequelize";
 import { config as LoadEnvironmentVariables } from "dotenv";
-import { mainSeed } from "./seeds/mainSeed";
 import { AppEnvironment } from "../utils/Defines";
 import { getEnvironment } from "../config/config";
-import { SysTypeMDEntity } from "./entities/SysTypesMDs";
 
 LoadEnvironmentVariables();
 

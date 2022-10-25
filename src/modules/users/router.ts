@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { createUser } from "./handlers/createUser";
 import { config as LoadEnvironmentVariables } from "dotenv";
-import { getUserByCpf, getUserByEmail, getUserByPhone } from "./handlers/getUser";
+import { getUserByCnpj, getUserByComercialName, getUserByCpf, getUserByEmail, getUserByPhone, getUserBySocialReason } from "./handlers/getUser";
 import { sendResponse } from "../../utils/HttpHandler";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
@@ -131,6 +131,129 @@ userRouter.get(
     try {
       const phone = request.params.Phone;
       const user = await getUserByPhone(phone);
+
+      if (user) {
+
+        sendResponse({
+          response,
+          statusCode: StatusCodes.OK,
+          error: false,
+          message: ReasonPhrases.OK,
+          data: user,
+        });
+
+      } else {
+
+        sendResponse({
+          response,
+          statusCode: StatusCodes.OK,
+          error: false,
+          message: ReasonPhrases.OK,
+          data: user,
+        });
+
+      };
+
+    } catch (error: any) {
+      sendResponse({
+        response,
+        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        error: false,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        data: null,
+      });
+    }
+  }
+);
+
+userRouter.get(
+  "/get-by-cnpj/:Cnpj",
+  async (request: Request, response: Response) => {
+    try {
+      const cnpj = request.params.Cnpj;
+      const user = await getUserByCnpj(cnpj);
+
+      if (user) {
+
+        sendResponse({
+          response,
+          statusCode: StatusCodes.OK,
+          error: false,
+          message: ReasonPhrases.OK,
+          data: user,
+        });
+
+      } else {
+
+        sendResponse({
+          response,
+          statusCode: StatusCodes.OK,
+          error: false,
+          message: ReasonPhrases.OK,
+          data: user,
+        });
+
+      };
+
+    } catch (error: any) {
+      sendResponse({
+        response,
+        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        error: false,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        data: null,
+      });
+    }
+  }
+);
+
+userRouter.get(
+  "/get-by-social-reason/:SocialReason",
+  async (request: Request, response: Response) => {
+    try {
+      const socialReason = request.params.SocialReason;
+      const user = await getUserBySocialReason(socialReason);
+
+      if (user) {
+
+        sendResponse({
+          response,
+          statusCode: StatusCodes.OK,
+          error: false,
+          message: ReasonPhrases.OK,
+          data: user,
+        });
+
+      } else {
+
+        sendResponse({
+          response,
+          statusCode: StatusCodes.OK,
+          error: false,
+          message: ReasonPhrases.OK,
+          data: user,
+        });
+
+      };
+
+    } catch (error: any) {
+      sendResponse({
+        response,
+        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        error: false,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        data: null,
+      });
+    }
+  }
+);
+
+userRouter.get(
+  "/get-by-comercial-name/:ComercialName",
+  async (request: Request, response: Response) => {
+    try {
+      const comercialName = request.params.ComercialName;
+      const user = await getUserByComercialName(comercialName);
 
       if (user) {
 

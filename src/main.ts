@@ -9,6 +9,7 @@ import 'moment/locale/pt-br';
 import { logApp } from './utils/Logs';
 import { getEnvironment } from './config/config';
 import { mainSeed } from './database/seeds/mainSeed';
+import { mainViews } from './database/views/migrations/mainViews';
 const environment = getEnvironment();
 
 
@@ -36,7 +37,8 @@ app.use("/user", userRouter);
 app.use("/auth", authRouter);
 
 setTimeout(()=> {
-  mainSeed()
+  mainSeed();
+  mainViews();
 }, 5 * 1000)
 
 app.listen(port, () => logApp(getEnvironment(), port));

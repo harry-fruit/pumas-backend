@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize";
 import { DataType } from "sequelize-typescript";
 import { DbInstance } from "../Database";
 import { SysTypeEntity } from "./SysType";
+import { SysTypeMDEntity } from "./SysTypesMDs";
 import { UserEntity } from "./User.entity";
 
 export const XDUserEntity = DbInstance.define(
@@ -14,7 +15,7 @@ export const XDUserEntity = DbInstance.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    IdSysType: {
+    IdSysTypeMD: {
       type: DataType.INTEGER,
       allowNull: false
     },
@@ -22,7 +23,7 @@ export const XDUserEntity = DbInstance.define(
       type: DataType.INTEGER,
       allowNull: false
     },
-    UniqueCode: {
+    Value: {
         type: DataType.STRING(255),
         unique: true,
         allowNull: false
@@ -44,5 +45,5 @@ export const XDUserEntity = DbInstance.define(
 );
 
 
-XDUserEntity.belongsTo(SysTypeEntity, { foreignKey: 'IdSysType' })
+XDUserEntity.belongsTo(SysTypeMDEntity, { foreignKey: 'IdSysTypeMD' })
 XDUserEntity.belongsTo(UserEntity, { foreignKey: 'IdUser' })

@@ -1,6 +1,9 @@
 import moment from "moment";
 import { CountryEntity } from "../entities/Country.entity";
+import { ItemEntity } from "../entities/Item";
 import { StateEntity } from "../entities/State.entity";
+import { StoreEntity } from "../entities/Store";
+import { SysCategoryEntity } from "../entities/SysCategory";
 import { SysTypeEntity } from "../entities/SysType";
 import { SysTypeMDEntity } from "../entities/SysTypesMDs";
 import { UserEntity } from "../entities/User.entity";
@@ -14,6 +17,9 @@ export const mainSeed = async () => {
     await runSysTypesMetaDatas();
     await runUsers();
     await runUserExtraData();
+    await runSysCategory();
+    await runStoreData();
+    await runItemData();
 
   } catch (error){
     console.log(error)
@@ -64,6 +70,37 @@ const runStateSeed = async (): Promise<void> => {
           CreatedAt: moment(),
         },
       ]);
+};
+
+const runSysCategory = async (): Promise<void> => {
+  await SysCategoryEntity.bulkCreate([
+    {
+      UniqueCode: 'VINHO',
+      Description: 'Vinho',
+      CreatedAt: moment()
+    },
+    {
+      UniqueCode: 'REFRIGERANTE',
+      Description: 'Refrigerante',
+      CreatedAt: moment()
+    },
+    {
+      UniqueCode: 'CERVEJA',
+      Description: 'Cerveja',
+      CreatedAt: moment()
+    },
+    {
+      UniqueCode: 'CHA',
+      Description: 'Chá',
+      CreatedAt: moment()
+    },
+    {
+      UniqueCode: 'WHISKY',
+      Description: 'Whisky',
+      CreatedAt: moment()
+    },
+    
+  ])
 };
 
 const runSysType = async (): Promise<void> => {
@@ -138,4 +175,73 @@ const runUserExtraData = async(): Promise<void> => {
     CreatedAt: moment()
   }])
 }
+
+const runStoreData = async(): Promise<void> => {
+  await StoreEntity.bulkCreate([{
+    CommercialName: 'Tonhão Bebidas',
+    City: 'São Paulo',
+    Address: 'Rua Sebastião Rodrigues',
+    Logo: null,
+    CreatedAt: moment()
+  }, {
+    CommercialName: 'Bar do Zequinha',
+    City: 'São Paulo',
+    Address: 'Rua Ademir Cordeiro',
+    Logo: null,
+    CreatedAt: moment()
+  }, {
+    CommercialName: 'Bar do Zé',
+    City: 'São Paulo',
+    Address: 'Rua Anésio de Moraes',
+    Logo: null,
+    CreatedAt: moment()
+  }, {
+    CommercialName: 'Drinks Jaque',
+    City: 'São Paulo',
+    Address: 'Rua Francisco Alves Rodrigues',
+    Logo: null,
+    CreatedAt: moment()
+  }, {
+    CommercialName: 'Downtown Drinks',
+    City: 'São Paulo',
+    Address: 'Rua Fausto Lourenço Gomes',
+    Logo: null,
+    CreatedAt: moment()
+  }])
+
+}
+
+const runItemData = async(): Promise<void> => {
+  await ItemEntity.bulkCreate([{
+    Category:'WHISKY',
+    UniqueCode: 'WHITE_HORSE',
+    Description: 'White Horse',
+    Price: 89.99,
+    Manufacturer: 'Diageo',
+    Image: null,
+    CreatedAt: moment()
+  },
+  {
+    UniqueCode: 'SUCO_MAGUARY',
+    Category:'SUCO',
+    Description: 'Suco de Laranja',
+    Price: 2.99,
+    Manufacturer: 'Maguary',
+    Image: null,
+    CreatedAt: moment()
+  },
+  {
+    UniqueCode: 'COCA_COLA',
+    Category:'REFRIGERANTE',
+    Description: 'Coca-cola',
+    Price: 8.99,
+    Manufacturer: 'Coca-cola',
+    Image: null,
+    CreatedAt: moment()
+  }
+])
+
+}
+
+
 

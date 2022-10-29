@@ -10,13 +10,17 @@ LoadEnvironmentVariables();
 export const userRouter: Router = Router();
 
 type CreateUserPayload = {
-  FirstName: string;
-  LastName: string;
+  FirstName?: string;
+  LastName?: string;
   Email: string;
-  Gender: string;
-  Cpf: string;
+  Gender?: string;
   Phone: string;
+  Cpf?: string;
+  Cnpj?: string;
   Password: string;
+  Cnh?: string;
+  Plate?: string;
+  UserType: string;
 };
 
 userRouter.post(

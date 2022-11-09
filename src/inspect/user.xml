@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<usuarios>
+  <usuario>
+    <nome>Jair</nome>
+    <idade>Bonossauro</idade>
+    <profissao>????</profissao>
+    <hobby>Andar de jetsky</hobby>
+  </usuario>
+  <usuario>
+    <nome>John</nome>
+    <idade>23</idade>
+    <profissao>Engenheiro</profissao>
+    <hobby>Churrasco</hobby>
+  </usuario>
+  <usuario>
+    <nome>Everton</nome>
+    <idade>34</idade>
+    <profissao>Pianista</profissao>
+    <hobby>Degustador</hobby>
+  </usuario>
+</usuarios>

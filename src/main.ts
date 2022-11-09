@@ -10,6 +10,7 @@ import { logApp } from './utils/Logs';
 import { getEnvironment } from './config/config';
 import { mainSeed } from './database/seeds/mainSeed';
 import { mainViews } from './database/views/migrations/mainViews';
+import { itemRouter } from './modules/items/router';
 const environment = getEnvironment();
 
 
@@ -35,6 +36,7 @@ DatabaseConnection();
 
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
+app.use("/items", itemRouter)
 
 setTimeout(()=> {
   mainSeed();

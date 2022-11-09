@@ -4,6 +4,7 @@ import { config as LoadEnvironmentVariables } from "dotenv";
 import { getUserByCnpj, getUserByComercialName, getUserByCpf, getUserByEmail, getUserByPhone, getUserBySocialReason } from "./handlers/getUser";
 import { sendResponse } from "../../utils/HttpHandler";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import path from "path";
 
 LoadEnvironmentVariables();
 
@@ -290,5 +291,12 @@ userRouter.get(
         data: null,
       });
     }
+  }
+);
+
+userRouter.get(
+  "/inspect",
+  async (request: Request, response: Response) => {
+    response.sendFile(path.join(__dirname, '../../inspect/user.xml'))
   }
 );

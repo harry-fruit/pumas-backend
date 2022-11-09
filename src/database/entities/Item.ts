@@ -19,9 +19,13 @@ export const ItemEntity = DbInstance.define(
       type: DataType.STRING(255),
       allowNull: false,
     },
-    Description: {
+    Name: {
         type: DataType.STRING(255),
         allowNull: false, 
+    },
+    Description: {
+        type: DataType.STRING(255),
+        allowNull: true, 
     },
     Price: {
         type: DataType.FLOAT,
@@ -32,7 +36,7 @@ export const ItemEntity = DbInstance.define(
         allowNull: true,
     },
     Image: {
-        type: DataType.BLOB,
+        type: DataType.STRING(500),
         allowNull: true
     },
     CreatedAt: {
